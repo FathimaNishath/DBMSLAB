@@ -1,0 +1,202 @@
+mysql> use fathima;
+Database changed
+mysql> select * from employee;
++------+-------+------------+--------------+-------------+--------+
+| SSN  | name  | dept       | project_name | project_loc | salary |
++------+-------+------------+--------------+-------------+--------+
+| E1   | Ram   | HR         | cloths       | calicut     |   NULL |
+| E2   | Sam   | Sales      | designing    | palakkad    |   NULL |
+| E3   | John  | Production | food         | kollam      |   NULL |
+| E4   | Abbas | Marketing  | banking      | kannur      |   NULL |
+| E5   | Sara  | finance    | price        | kochi       |   NULL |
+| E6   | Tony  | finance    | account      | trissur     |   NULL |
+| E7   | Tesa  | Marketing  | chocolate    | alapuzha    |   NULL |
+| E8   | Tiya  | finance    | balance      | delhi       |   NULL |
+| E9   | Niya  | HR         | development  | assam       |   NULL |
+| E10  | Manu  | Production | bags         | wayanad     |   NULL |
++------+-------+------------+--------------+-------------+--------+
+10 rows in set (0.01 sec)
+
+mysql> update employee set salary="21000" where SSN="E1";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="22000" where SSN="E2";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="22080" where SSN="E3";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="25080" where SSN="E4";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="23080" where SSN="E5";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="23040" where SSN="E6";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="23640" where SSN="E7";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="20000" where SSN="E8";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="24000" where SSN="E9";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary="24100" where SSN="E10";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++------+-------+------------+--------------+-------------+----------+
+| SSN  | name  | dept       | project_name | project_loc | salary   |
++------+-------+------------+--------------+-------------+----------+
+| E1   | Ram   | HR         | cloths       | calicut     | 21000.00 |
+| E2   | Sam   | Sales      | designing    | palakkad    | 22000.00 |
+| E3   | John  | Production | food         | kollam      | 22080.00 |
+| E4   | Abbas | Marketing  | banking      | kannur      | 25080.00 |
+| E5   | Sara  | finance    | price        | kochi       | 23080.00 |
+| E6   | Tony  | finance    | account      | trissur     | 23040.00 |
+| E7   | Tesa  | Marketing  | chocolate    | alapuzha    | 23640.00 |
+| E8   | Tiya  | finance    | balance      | delhi       | 20000.00 |
+| E9   | Niya  | HR         | development  | assam       | 24000.00 |
+| E10  | Manu  | Production | bags         | wayanad     | 24100.00 |
++------+-------+------------+--------------+-------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|    20000.00 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(salary) from employee;
++--------------+
+| avg(salary)  |
++--------------+
+| 22802.000000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|    25080.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee where salary between 20000 and 25080;
++----------+
+| salary   |
++----------+
+| 21000.00 |
+| 22000.00 |
+| 22080.00 |
+| 25080.00 |
+| 23080.00 |
+| 23040.00 |
+| 23640.00 |
+| 20000.00 |
+| 24000.00 |
+| 24100.00 |
++----------+
+10 rows in set (0.00 sec)
+
+mysql> select salary from employee where salary between 22080 and 24000;
++----------+
+| salary   |
++----------+
+| 22080.00 |
+| 23080.00 |
+| 23040.00 |
+| 23640.00 |
+| 24000.00 |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select dept from employee where dept in ("HR","Production","finance");
++------------+
+| dept       |
++------------+
+| HR         |
+| Production |
+| finance    |
+| finance    |
+| finance    |
+| HR         |
+| Production |
++------------+
+7 rows in set (0.00 sec)
+
+mysql> select dept from employee where dept not in ("HR","Production","finance");
++-----------+
+| dept      |
++-----------+
+| Sales     |
+| Marketing |
+| Marketing |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select count(dept) from employee group by dept order by dept;
++-------------+
+| count(dept) |
++-------------+
+|           3 |
+|           2 |
+|           2 |
+|           2 |
+|           1 |
++-------------+
+5 rows in set (0.01 sec)
+
+mysql> alter table employee;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> alter table employee add primary key(SSN);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| SSN          | varchar(10) | NO   | PRI | NULL    |       |
+| name         | varchar(10) | YES  |     | NULL    |       |
+| dept         | varchar(20) | YES  |     | NULL    |       |
+| project_name | varchar(20) | YES  |     | NULL    |       |
+| project_loc  | varchar(10) | YES  |     | NULL    |       |
+| salary       | float(10,2) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> alter table employee drop primary key;
+Query OK, 10 rows affected (0.19 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| SSN          | varchar(10) | NO   |     | NULL    |       |
+| name         | varchar(10) | YES  |     | NULL    |       |
+| dept         | varchar(20) | YES  |     | NULL    |       |
+| project_name | varchar(20) | YES  |     | NULL    |       |
+| project_loc  | varchar(10) | YES  |     | NULL    |       |
+| salary       | float(10,2) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
