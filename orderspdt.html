@@ -1,0 +1,170 @@
+mysql> create table orders(odrid int,odrname varchar(20),custid int,custname varchar(20),odrdate date);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into orders values(11,"cloths",1,"Ran",'2024-12-1');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(12,"food",2,"Ram",'2024-12-2');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(13,"bags",3,"Rah",'2024-12-3');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(14,"keys",4,"Rak",'2024-12-4');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(15,"shoes",5,"Ral",'2024-12-5');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from orders;
++-------+---------+--------+----------+------------+
+| odrid | odrname | custid | custname | odrdate    |
++-------+---------+--------+----------+------------+
+|    11 | cloths  |      1 | Ran      | 2024-12-01 |
+|    12 | food    |      2 | Ram      | 2024-12-02 |
+|    13 | bags    |      3 | Rah      | 2024-12-03 |
+|    14 | keys    |      4 | Rak      | 2024-12-04 |
+|    15 | shoes   |      5 | Ral      | 2024-12-05 |
++-------+---------+--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table product(pid varchar(10),pname varchar(20),odrid int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into product values("p1","chappal",101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values("p2","dress",102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values("p3","mobilephone",103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values("p4","soap",104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values("p5","rings",105);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++------+-------------+-------+
+| pid  | pname       | odrid |
++------+-------------+-------+
+| p1   | chappal     |   101 |
+| p2   | dress       |   102 |
+| p3   | mobilephone |   103 |
+| p4   | soap        |   104 |
+| p5   | rings       |   105 |
++------+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update product set odrid="11";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set odrid="12";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set odrid="13";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set odrid="14";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set odrid="15";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from product;
++------+-------------+-------+
+| pid  | pname       | odrid |
++------+-------------+-------+
+| p1   | chappal     |    15 |
+| p2   | dress       |    15 |
+| p3   | mobilephone |    15 |
+| p4   | soap        |    15 |
+| p5   | rings       |    15 |
++------+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update product set odrid="11" where pid="p1";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++------+-------------+-------+
+| pid  | pname       | odrid |
++------+-------------+-------+
+| p1   | chappal     |    11 |
+| p2   | dress       |    15 |
+| p3   | mobilephone |    15 |
+| p4   | soap        |    15 |
+| p5   | rings       |    15 |
++------+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update product set odrid="12" where pid="p2";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set odrid="13" where pid="p3";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set odrid="14" where pid="p4";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set odrid="15" where pid="p5";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from product;
++------+-------------+-------+
+| pid  | pname       | odrid |
++------+-------------+-------+
+| p1   | chappal     |    11 |
+| p2   | dress       |    12 |
+| p3   | mobilephone |    13 |
+| p4   | soap        |    14 |
+| p5   | rings       |    15 |
++------+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select orders.custid,orders.odrid,product.pid,product.pname from orders join product on orders.odrid=product.odrid;
++--------+-------+------+-------------+
+| custid | odrid | pid  | pname       |
++--------+-------+------+-------------+
+|      1 |    11 | p1   | chappal     |
+|      2 |    12 | p2   | dress       |
+|      3 |    13 | p3   | mobilephone |
+|      4 |    14 | p4   | soap        |
+|      5 |    15 | p5   | rings       |
++--------+-------+------+-------------+
+5 rows in set (0.00 sec)
+mysql> select orders.custid,orders.odrid,product.pid,product.pname from orders left join product on orders.odrid=product.odrid;
++--------+-------+------+-------------+
+| custid | odrid | pid  | pname       |
++--------+-------+------+-------------+
+|      1 |    11 | p1   | chappal     |
+|      2 |    12 | p2   | dress       |
+|      3 |    13 | p3   | mobilephone |
+|      4 |    14 | p4   | soap        |
+|      5 |    15 | p5   | rings       |
++--------+-------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select orders.custid,orders.odrid,product.pid,product.pname from orders right join product on orders.odrid=product.odrid;
++--------+-------+------+-------------+
+| custid | odrid | pid  | pname       |
++--------+-------+------+-------------+
+|      1 |    11 | p1   | chappal     |
+|      2 |    12 | p2   | dress       |
+|      3 |    13 | p3   | mobilephone |
+|      4 |    14 | p4   | soap        |
+|      5 |    15 | p5   | rings       |
++--------+-------+------+-------------+
+5 rows in set (0.00 sec)
