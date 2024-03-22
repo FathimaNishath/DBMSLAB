@@ -1,0 +1,97 @@
+mysql> create table deprt(Did int,dname varchar(20),dloc varchar(20));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into deprt values(1,"HR","assam");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into deprt values(2,"HR","delhi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(3,"finance","kochi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(4,"finance","kollam");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(5,"marketing","kozhikode");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(6,"marketing","banglore");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(7,"production","trivtrm");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(8,"production","kottayam");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into deprt values(9,"sales","punjab");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into deprt values(10,"sales","maharashtra");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from deprt;
++------+------------+-------------+
+| Did  | dname      | dloc        |
++------+------------+-------------+
+|    1 | HR         | assam       |
+|    2 | HR         | delhi       |
+|    3 | finance    | kochi       |
+|    4 | finance    | kollam      |
+|    5 | marketing  | kozhikode   |
+|    6 | marketing  | banglore    |
+|    7 | production | trivtrm     |
+|    8 | production | kottayam    |
+|    9 | sales      | punjab      |
+|   10 | sales      | maharashtra |
++------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table deprt add primary key (Did);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from deprt;
++-----+------------+-------------+
+| Did | dname      | dloc        |
++-----+------------+-------------+
+|   1 | HR         | assam       |
+|   2 | HR         | delhi       |
+|   3 | finance    | kochi       |
+|   4 | finance    | kollam      |
+|   5 | marketing  | kozhikode   |
+|   6 | marketing  | banglore    |
+|   7 | production | trivtrm     |
+|   8 | production | kottayam    |
+|   9 | sales      | punjab      |
+|  10 | sales      | maharashtra |
++-----+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table deprt add primary key (Did);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> desc deprt;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Did   | int         | NO   | PRI | NULL    |       |
+| dname | varchar(20) | YES  |     | NULL    |       |
+| dloc  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table deprt drop primary key;
+Query OK, 10 rows affected (0.05 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc deprt;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Did   | int         | NO   |     | NULL    |       |
+| dname | varchar(20) | YES  |     | NULL    |       |
+| dloc  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
