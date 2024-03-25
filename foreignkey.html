@@ -1,0 +1,81 @@
+mysql> use fathima;
+Database changed
+mysql> select * from orders;
++-------+---------+--------+----------+------------+
+| odrid | odrname | custid | custname | odrdate    |
++-------+---------+--------+----------+------------+
+|    11 | cloths  |      1 | Ran      | 2024-12-01 |
+|    12 | food    |      2 | Ram      | 2024-12-02 |
+|    13 | bags    |      3 | Rah      | 2024-12-03 |
+|    14 | keys    |      4 | Rak      | 2024-12-04 |
+|    15 | shoes   |      5 | Ral      | 2024-12-05 |
++-------+---------+--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++------+-------------+-------+
+| pid  | pname       | odrid |
++------+-------------+-------+
+| p1   | chappal     |    11 |
+| p2   | dress       |    12 |
+| p3   | mobilephone |    13 |
+| p4   | soap        |    14 |
+| p5   | rings       |    15 |
++------+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table product add primary key (pid);
+Query OK, 0 rows affected (0.29 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(10) | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| odrid | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table orders add primary key (odrid);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| odrid    | int         | NO   | PRI | NULL    |       |
+| odrname  | varchar(20) | YES  |     | NULL    |       |
+| custid   | int         | YES  |     | NULL    |       |
+| custname | varchar(20) | YES  |     | NULL    |       |
+| odrdate  | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table product add foreign key (odrid) references orders (odrid);
+Query OK, 5 rows affected (0.11 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(10) | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| odrid | int         | YES  | MUL | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select orders.odrid,product.odrid from orders join product on orders.odrid=product.odrid;
++-------+-------+
+| odrid | odrid |
++-------+-------+
+|    11 |    11 |
+|    12 |    12 |
+|    13 |    13 |
+|    14 |    14 |
+|    15 |    15 |
++-------+-------+
+5 rows in set (0.00 sec)
