@@ -1,0 +1,109 @@
+mysql> use fathima;
+Database changed
+mysql> select * from orders;
++-------+---------+--------+----------+------------+
+| odrid | odrname | custid | custname | odrdate    |
++-------+---------+--------+----------+------------+
+|    11 | cloths  |      1 | Ran      | 2024-12-01 |
+|    12 | food    |      2 | Ram      | 2024-12-02 |
+|    13 | bags    |      3 | Rah      | 2024-12-03 |
+|    14 | keys    |      4 | Rak      | 2024-12-04 |
+|    15 | shoes   |      5 | Ral      | 2024-12-05 |
++-------+---------+--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+-------------+-------+
+| pid | pname       | odrid |
++-----+-------------+-------+
+| p1  | chappal     |    11 |
+| p2  | dress       |    12 |
+| p3  | mobilephone |    13 |
+| p4  | soap        |    14 |
+| p5  | rings       |    15 |
++-----+-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select odrid,custname from orders o  where exists(select * from product p where p.odrid=o.odrid);
++-------+----------+
+| odrid | custname |
++-------+----------+
+|    11 | Ran      |
+|    12 | Ram      |
+|    13 | Rah      |
+|    14 | Rak      |
+|    15 | Ral      |
++-------+----------+
+5 rows in set (0.00 sec)
+mysql> create table faculty(facno int primary key,fname varchar(20),staffid int, foreign key (staffid) references course (staffid));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from course;
++----------+------------+---------+
+| courseno | coursename | staffid |
++----------+------------+---------+
+|        1 | MCA        |      10 |
+|        2 | MBA        |      11 |
+|        3 | CIVIL      |      12 |
+|        4 | EC         |      13 |
+|        5 | MCOM       |      14 |
++----------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> desc course;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| courseno   | int         | YES  |     | NULL    |       |
+| coursename | varchar(20) | YES  |     | NULL    |       |
+| staffid    | int         | NO   | PRI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc faculty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| facno   | int         | NO   | PRI | NULL    |       |
+| fname   | varchar(20) | YES  |     | NULL    |       |
+| staffid | int         | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into faculty values(1,"arun",10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into faculty values(2,"varun",11);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values(3,"sam",12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values(4,"ram",13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into faculty values(5,"dam",14);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from faculty;
++-------+-------+---------+
+| facno | fname | staffid |
++-------+-------+---------+
+|     1 | arun  |      10 |
+|     2 | varun |      11 |
+|     3 | sam   |      12 |
+|     4 | ram   |      13 |
+|     5 | dam   |      14 |
++-------+-------+---------+
+5 rows in set (0.00 sec)
+mysql> select staffid,fname from faculty f  where exists(select * from course c where c.staffid=f.staffid);
++---------+-------+
+| staffid | fname |
++---------+-------+
+|      10 | arun  |
+|      11 | varun |
+|      12 | sam   |
+|      13 | ram   |
+|      14 | dam   |
++---------+-------+
+5 rows in set (0.00 sec)
